@@ -168,3 +168,48 @@ tabF <- aux %>% rowwise() %>%
   select(-controls_list,-instruments_list) %>%
   arrange(modelo)
 tabF
+
+tabla_age5 <-  tabF %>% mutate(
+  modelo = factor(modelo, levels = paste0("E", 1:5)),
+  age_group5 = factor(
+    age_group5,
+    levels = c(
+      "0-9", "10-14", "15-19", "20-24", "25-29",
+      "30-34", "35-39", "40-44", "45-49", "50-54",
+      "55-59", "60-64", "65-69", "70-74"
+    )
+  ))
+
+plot_qaly <- ggplot(
+  tabla_age5,
+  aes(
+    x = age_group5,
+    y = prop_UCE_qaly,
+    group = modelo,
+    linewidth = modelo == "E1",
+    alpha = modelo == "E1",
+    linetype = modelo,
+    color = modelo
+  )
+) +
+  geom_line() +
+  geom_point(aes(size = modelo == "E1")) +
+  scale_linewidth_manual(values = c(`TRUE` = 1.3, `FALSE` = 0.55), guide = "none") +
+  scale_size_manual(values = c(`TRUE` = 2.4, `FALSE` = 1.4), guide = "none") +
+  scale_alpha_manual(values = c(`TRUE` = 1, `FALSE` = 0.45), guide = "none") +
+  scale_y_continuous(labels = scales::number_format(accuracy = 0.1)) +
+  labs(
+    x = "Age group",
+    y = "CET / GGP per capita",
+    color = "",
+    linetype = ""
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(
+    legend.position = "bottom",
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(face = "bold")
+  )
+
+plot_qaly
