@@ -37,6 +37,7 @@ df_uce <- qaly %>% full_join(yll,by = c('anio')) %>%
          QALY_pc = QALY*prop_ajuste/afiliados,lQALY_pc = log(QALY_pc))
 
 # FIGURES ---------------------------------------------------------------------
+
 # Health outcomes density
 qaly_all %>% mutate(QALY = log(QALY)) %>%
   group_by(anio) %>%
@@ -123,7 +124,6 @@ ggplot(df_uce, aes(x = anio)) +
     panel.grid.minor = element_blank(),
     panel.grid.major.x = element_blank()
   )
-
 
 # Figure C2 Instruments
 ggplot(df_uce, aes(x = anio)) +
