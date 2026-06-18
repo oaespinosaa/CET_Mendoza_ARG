@@ -59,6 +59,7 @@ df_uce_tot <- qaly %>% full_join(yll,by = c('anio','grupo_edad')) %>%
   left_join(regresion,by = c('anio' = 'Año')) %>% 
   mutate(YLL_pc = YLL*prop_ajuste/afiliados_grupoedad,lYLL_pc = log(YLL_pc), 
          QALY_pc = QALY*prop_ajuste/afiliados_grupoedad,lQALY_pc = log(QALY_pc))
+
 # Add the lagged variables
 df_uce_tot <- df_uce_tot %>%
   group_by(grupo_edad) %>% arrange(anio) %>%
