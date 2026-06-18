@@ -64,7 +64,6 @@ df_uce <- df_uce %>%
          dummy2020 = ifelse(anio %in% 2020,1,0),
          dummy2021 = ifelse(anio %in% 2021,1,0))
 
-
 # Considered models
 reg_posibles <- tibble(controls_list = list(c('lpobl_total','GS_LAC'),
                                             c('tasa_desempleo','inflacion'),
