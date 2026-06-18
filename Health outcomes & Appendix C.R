@@ -82,6 +82,7 @@ yll_all %>% mutate(YLL = log(YLL)) %>%
   theme(legend.position = "bottom",panel.grid.minor = element_blank())
 
 # Appendix C
+
 # Figure C1
 factor_gs <- max(c(df_uce$YLL_pc, df_uce$QALY_pc), na.rm = TRUE) / 
   max(df_uce$gs_pc, na.rm = TRUE)
