@@ -80,8 +80,8 @@ reg_posibles <- tibble(controls_list = list(c('lpobl_total','GS_LAC'),
 
 # Function for extract F-stat first stage
 extract_iv_fstat <- function(model) {
-  
-  s <- suppressMessages(summary(model,vcovHC(model, type = "HC1"), diagnostics = TRUE))
+  V_HAC <- NeweyWest(model,lag = 1,prewhite = FALSE,adjust = TRUE)
+  s <- suppressMessages(summary(model,V_HAC, diagnostics = TRUE))
   aux <- s$coefficients['lag_lgs_pc',c('Std. Error','Pr(>|t|)')]
   diag_tab <- s$diagnostics
   
