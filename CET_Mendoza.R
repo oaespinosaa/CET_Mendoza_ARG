@@ -19,6 +19,7 @@ total_xs <- c(demog_xs,macro_xs,'GS_LAC')
 total_iv <- c('PBG_minero_2024','PBG_pc','Prop_PBGagro',
               'Regalias_2024','Coparticipacion_2024',
               'Origenpc_2024')
+
 # Data
 file <- 'Data/Regression data.xlsx'
 gs_pc <- read_excel(file,sheet = 'GS_pc') %>% 
@@ -62,7 +63,6 @@ df_uce <- df_uce %>%
   mutate(dummy = ifelse(anio %in% 2020:2021,1,0),
          dummy2020 = ifelse(anio %in% 2020,1,0),
          dummy2021 = ifelse(anio %in% 2021,1,0))
-
 
 # Considered models
 reg_posibles <- tibble(controls_list = list(c('lpobl_total','GS_LAC'),
