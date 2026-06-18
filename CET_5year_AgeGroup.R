@@ -24,6 +24,7 @@ poblacion <- read_excel(file, sheet = 'Poblacion') %>% select(Año,pobl_total = 
 mortalidad <- read_excel(file,sheet = 'Mortalidad') %>% select(Año,prop_ajuste)
 instrumentos <- read_excel(file,sheet = 'Instrumentos') %>% 
   select(Año,PBG_minero_2024,PBG_pc,Regalias_2024,Coparticipacion_2024,Origenpc_2024)
+
 # Adjustment coverage by 5-year age group
 age_groups5 <- c('0-4','5-9',paste0(seq(10,75,5),'-',seq(14,79,5)),'80+')
 poblacion_grupo5 <- read_excel('Data/AjustePoblacion_GrupoEdad5.xlsx') %>%
@@ -67,6 +68,7 @@ df_uce_tot <- qaly %>% full_join(yll,by = c('anio','age_group5_2')) %>%
   left_join(regresion,by = c('anio' = 'Año')) %>% 
   mutate(YLL_pc = YLL*prop_ajuste/afiliados_grupoedad,lYLL_pc = log(YLL_pc), 
          QALY_pc = QALY*prop_ajuste/afiliados_grupoedad,lQALY_pc = log(QALY_pc))
+
 # Add the lagged variables
 df_uce_tot <- df_uce_tot %>%
   group_by(age_group5_2) %>% arrange(anio) %>%
@@ -95,6 +97,7 @@ reg_posibles <- tibble(controls_list = list(c('lpobl_total','GS_LAC'),
                                                c('PBG_minero_2024','Regalias_2024')),
                        tend_dum = c('+dummy2021','+dummy','+dummy2020','+dummy2020','+dummy2021'),
                        modelo = paste0('E',1:5))
+
 # Compute CET by 5-year age group =========================================
 aux <- NULL
 for (age in c('0-9',age_groups5[-c(1:2,16:17)])){
