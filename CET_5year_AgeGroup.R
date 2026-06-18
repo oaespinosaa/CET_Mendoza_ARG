@@ -13,7 +13,7 @@ macro_xs=c('tasa_desempleo','inflacion','TRM')
 total_xs <- c(demog_xs,macro_xs,'GS_LAC')
 
 # Data
-file <- 'Data/Datos_regresiones.xlsx'
+file <- 'Data/Regression data.xlsx'
 gs_pc <- read_excel(file,sheet = 'GS_pc') %>% 
   select(Año,afiliados = `Afiliados total`,gs = `Total 2024`,gs_pc = PC_total,GS_LAC,prop = Proporcion)
 tasa_desempleo <- read_excel(file,sheet = 'Desempleo') %>% group_by(Año) %>% summarise(tasa_desempleo = mean(Tasa),.groups = 'drop')
@@ -26,7 +26,7 @@ instrumentos <- read_excel(file,sheet = 'Instrumentos') %>%
   select(Año,PBG_minero_2024,PBG_pc,Regalias_2024,Coparticipacion_2024,Origenpc_2024)
 # Adjustment coverage by 5-year age group
 age_groups5 <- c('0-4','5-9',paste0(seq(10,75,5),'-',seq(14,79,5)),'80+')
-poblacion_grupo5 <- read_excel('Data/AjustePoblacion_GrupoEdad5.xlsx') %>%
+poblacion_grupo5 <- read_excel('Data/PopulationAdjust_AgeGroup5.xlsx') %>%
   mutate(grupo_edad = case_when(age_group5 %in% age_groups5[1:3]~'0-14',
                                 age_group5 %in% age_groups5[4:13]~'15-64',
                                 age_group5 %in% age_groups5[14:17]~'65+'))

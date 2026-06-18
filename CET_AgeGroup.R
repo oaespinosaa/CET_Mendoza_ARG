@@ -13,7 +13,7 @@ macro_xs=c('tasa_desempleo','inflacion','TRM')
 total_xs <- c(demog_xs,macro_xs,'GS_LAC')
 
 # Data
-file <- 'Data/Datos_regresiones.xlsx'
+file <- 'Data/Regression data.xlsx'
 gs_pc <- read_excel(file,sheet = 'GS_pc') %>% 
   select(Año,afiliados = `Afiliados total`,gs = `Total 2024`,gs_pc = PC_total,GS_LAC,prop = Proporcion)
 tasa_desempleo <- read_excel(file,sheet = 'Desempleo') %>% group_by(Año) %>% summarise(tasa_desempleo = mean(Tasa),.groups = 'drop')
