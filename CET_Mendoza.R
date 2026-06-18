@@ -19,6 +19,7 @@ total_xs <- c(demog_xs,macro_xs,'GS_LAC')
 total_iv <- c('PBG_minero_2024','PBG_pc','Prop_PBGagro',
               'Regalias_2024','Coparticipacion_2024',
               'Origenpc_2024')
+
 # Data
 file <- 'Data/Datos_regresiones.xlsx'
 gs_pc <- read_excel(file,sheet = 'GS_pc') %>% 
